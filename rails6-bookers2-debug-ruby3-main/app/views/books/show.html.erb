@@ -35,14 +35,29 @@
                  <% end %>
             <% else %>
                <%= link_to book_favorites_path(@book.id), method: :post do %>
-
                  <span style="color:blue;">❤︎</span>
                  <%= @book.favorites.count %>
                <% end %>
             <% end %>
           </td>
+          <td>
+            <p>コメント数：<%= @book.book_comments.count %></p>
+            <% @book.book_comments.each do |book_comment| %>
+               <p><%= image_tag book_comment.user.get_profile_image(100,100) %></p>
+               <%= book_comment.user.name %>
+               <% if book_comment.user == current_user %>
+                 <%= link_to "Destroy", book_book_comment_path(book_comment.book, book_comment), method: :delete, class: "btn btn-sm btn-danger" %>
+               <% end %>
+            <% end %>
+          </td>
         </tr>
       </table>
+      <div>
+        <%= form_with model: [@book, @newcomment] do |f| %>
+          <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
+          <%= f.submit "送信" %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
