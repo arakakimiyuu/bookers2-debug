@@ -4,7 +4,7 @@ class BookCommentsController < ApplicationController
     book = Book.find(params[:book_id])
     comment = current_user.book_comments.new(book_comment_params)
     comment.book_id = book.id
-    commet.save
+    comment.save
     redirect_to book_path(book)
   end
 
@@ -16,7 +16,7 @@ class BookCommentsController < ApplicationController
   private
 
   def book_comment_params
-    params.require(:book_commnt).permit(:comment, :book_id, :user_id)
+    params.require(:book_comment).permit(:comment)
   end
 
 end
