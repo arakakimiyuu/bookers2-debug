@@ -1,7 +1,7 @@
 <h1>Follower Users</h1>
 <% if @users.exists? %>
   <% @users.each do |user| %>
-    <table>
+    <table class='table'>
       <thead>
         <tr>
           <th>image</th>
@@ -11,11 +11,11 @@
       </thead>
       <tbody>
         <tr>
-          <td style="padding:2px 4px 6px 8px;"><%= image_tag user.get_profile_image, size: '50x50' %></td>
-          <td style="padding:2px 4px 6px 8px;"><%= user.name %></td>
-          <td style="padding:2px 4px 6px 8px;">フォロー数: <%= user.followings.count %></td>
-          <td style="padding:2px 4px 6px 8px;">フォロワー数: <%= user.followers.count %></td>
-          <td style="padding:2px 4px 6px 8px;"><%= link_to 'Show', books_path %></td>
+          <td><%= image_tag user.get_profile_image, size: '50x50' %></td>
+          <td><%= user.name %></td>
+          <td>フォロー数: <%= user.followings.count %></td>
+          <td>フォロワー数: <%= user.followers.count %></td>
+          <td><%= link_to 'Show', books_path %></td>
         </tr>
       </tbody>
     </table>
