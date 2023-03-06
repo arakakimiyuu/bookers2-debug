@@ -20,6 +20,11 @@ window.raty = function(elem,opt) {
   return raty;
 }
 
+require("jquery")
+
+window.$ = window.jQuery = require('jquery');
+require('packs/raty')
+
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
