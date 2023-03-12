@@ -10,9 +10,6 @@ class Book < ApplicationRecord
   validates :title,presence:true
   validates :body,presence:true,length:{maximum:200}
 
-  scope :latest, -> {order(created_at: :desc)}
-  scope :old, -> {order(created_at: :asc)}
-  scope :star_count, -> {order(star: :desc)}
 
   def favorited_by?(user)
     favorites.where(user_id: user.id).exists?
@@ -39,17 +36,15 @@ class Book < ApplicationRecord
     end
   end
 
-  def self.looks(search, word)
-    if search == "perfect_match"
-      @books = Book.where("title LIKE?","#{word}")
-    elsif search == "forward_match"
-      @books = Book.where("title LIKE?","#{word}%")
-    elsif search == "backward_match"
-      @books = Book.where("title LIKE?","%#{word}")
-    elsif search == "partial_match"
-      @books = Book.where("title LIKE?","%#{word}%")
+ def self.search_for(content, method)
+    if method == 'perfect'
+      Book.where(title: content)
+    elsif method == 'forward'
+      Book.where('title LIKE ?', content+'%')
+    elsif method == 'backward'
+      Book.where('title LIKE ?', '%'+content)
     else
-      @books = Book.all
+      Book.where('title LIKE ?', '%'+content+'%')
     end
   end
 

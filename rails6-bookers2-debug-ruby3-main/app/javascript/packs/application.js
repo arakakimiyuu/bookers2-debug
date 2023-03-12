@@ -12,8 +12,13 @@ import "popper.js"
 import "bootstrap"
 import '@fortawesome/fontawesome-free/js/all';
 import "../stylesheets/application"
+import jQuery from "jquery"
+
 
 import 'jquery'
+
+global.$ = jQuery;
+window.$ = jQuery
 
 import Raty from "raty.js"
 window.raty = function(elem,opt) {
@@ -25,7 +30,7 @@ window.raty = function(elem,opt) {
 require("jquery")
 
 window.$ = window.jQuery = require('jquery');
-require('packs/raty')
+require('raty')
 
 
 
